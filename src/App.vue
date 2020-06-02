@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <BlogsList/>
+      <BlogsList :classification="'JS'"/>
   </div>
 </template>
 
