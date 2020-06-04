@@ -11,8 +11,8 @@
                 关键词: {{blogHead.keyword}}
             </div>
   </div>
-  <div id="blogContent">
-      {{blogContentDom}}
+  <div id="blogContent" v-html="blogContentDom">
+      
   </div>
     </div>
   
@@ -25,10 +25,10 @@ export default {
     data(){
         return{
             name:"BlogContent",
-            blogPath:null,
-            blogHead:null,
-            blogContentMarkdown:null,
-            blogContentDom:null,
+            blogPath:"",
+            blogHead:"",
+            blogContentMarkdown:"",
+            blogContentDom:"",
             engine:null
 
         }
@@ -53,7 +53,7 @@ export default {
             
             }catch(e){
                 this.blogContentDom="获取内容失败"
-                throw e;
+                // throw e;
             }
         }
     }
