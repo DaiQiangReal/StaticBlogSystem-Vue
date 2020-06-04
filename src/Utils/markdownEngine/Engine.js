@@ -1,10 +1,10 @@
 
-function getBlogMessage(content){
+function getBlogMessage(contentMarkdown){
     let reg=/\/\*[\w\W]+?\*\//;
     let titleReg=/title:[\w\W]+?\n/;
     let dateReg=/date:\d\d\d\d-\d\d-\d\d\n/;
     let keywordReg=/keyword:[\w\W]+?\n/;
-    let res=reg.exec(content)[0];
+    let res=reg.exec(contentMarkdown)[0];
     let title=titleReg.exec(res)?titleReg.exec(res)[0].trim():null;
     let date=dateReg.exec(res)?dateReg.exec(res)[0].trim():null;
     let keyword=keywordReg.exec(res)?keywordReg.exec(res)[0].trim():null;
@@ -16,17 +16,17 @@ function getBlogMessage(content){
 }
 
 class Engine{
-    constructor(content) {
-        this.contentStr=content;
+    constructor(contentMarkdown) {
+        this.contentMarkdown=contentMarkdown;
         this.headMessage=null;
     }
 
     getBlogHead(){
-        return this.headMessage?this.headMessage:(this.headMessage=getBlogMessage(this.contentStr))
+        return this.headMessage?this.headMessage:(this.headMessage=getBlogMessage(this.contentMarkdown))
     }
 
     getBlogContentDom(){
-        return this.content;
+        return this.contentMarkdown;
     }
 
 }
