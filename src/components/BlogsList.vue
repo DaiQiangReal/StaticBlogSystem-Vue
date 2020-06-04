@@ -1,10 +1,13 @@
 <template>
   <div>
-      List
+      <a v-for="blogName in blogListData" :key="blogName" href="blog.html" target="_blank">
+          {{blogName}}
+      </a>
   </div>
 </template>
 
 <script>
+import Engine from "../Utils/markdownEngine/Engine"
 export default {
     props:['classification'],
     data(){
@@ -21,13 +24,13 @@ export default {
     watch:{
     },
     mounted(){
-        this.getBlogsDateByClassification()
+        this.getBlogsListByClassification();
     },
     methods:{
-        async getBlogsDateByClassification(){
+        async getBlogsListByClassification(){
             if(!this.classification){
                 console.log("try again after 100ms");
-                setTimeout(this.getBlogsDateByClassification,100);
+                setTimeout(this.getBlogsListByClassification,100);
                 return;
             }
             let nameTxtCountent=await (await fetch("./blogs/"+this.classification+"/name.txt")).text();
@@ -35,7 +38,6 @@ export default {
         },
         async getBlogContentByFilename(blogFileName){
             let text=await (await fetch("./blogs/"+this.classification+"/"+blogFileName)).text();
-            
         }
     },
     

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import BlogsList from './components/BlogsList.vue'
+import BlogsList from '../../components/BlogsList.vue'
 
 export default {
   name: 'App',
