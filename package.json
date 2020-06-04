@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "less-loader": "^6.1.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -33,8 +34,8 @@
       "parser": "babel-eslint"
     },
     "rules": {
-        "no-unused-vars":0,
-        "no-unused-components":0
+      "no-unused-vars": 0,
+      "no-unused-components": 0
     }
   },
   "browserslist": [

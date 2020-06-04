@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div id="main">
+      <div>
+          {{classification}}
+      </div>
+      <hr>
       <a v-for="blogName in blogListData" :key="blogName" href="blog.html" target="_blank">
           {{blogName}}
       </a>
@@ -45,5 +49,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+div[id="main"]{
+    border: 1px solid gray;
+    padding: 1rem;
+    width:10rem;
+    a{
+        display: block;
+        text-decoration-line: none;
+        margin: 0.2em;
+    
+        width:100%;
+        word-wrap:break-word;;
+        word-break: normal;
+    }
+}
 </style>>
