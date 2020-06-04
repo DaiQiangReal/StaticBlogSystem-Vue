@@ -4,7 +4,7 @@
           {{classification}}
       </div>
       <hr>
-      <a v-for="blogName in blogListData" :key="blogName" href="blog.html" target="_blank">
+      <a v-for="blogName in blogListData" :key="blogName" :href="'blog.html'+'?'+'path='+classification+'&filename='+blogName" target="_blank">
           {{blogName}}
       </a>
   </div>

@@ -25,6 +25,10 @@ class Engine{
         return this.headMessage?this.headMessage:(this.headMessage=getBlogMessage(this.contentStr))
     }
 
+    getBlogContentDom(){
+        return this.content;
+    }
+
 }
 
 export default Engine
