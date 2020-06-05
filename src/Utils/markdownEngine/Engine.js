@@ -40,9 +40,9 @@ function calculateOneMarkdownLine(markdown) {
     reg = /\*{2}[\w\W]+\*{2}/
     res = reg.exec(markdown);
     if (res) {
-        console.log(1, markdown)
+        
         markdown = markdown.replace(reg, '<b>' + res[0].slice(2, -2) + '</b>')
-        console.log(2, markdown)
+        
     }
     //斜体
     reg = /\*{1}[\w\W]+\*{1}/
@@ -51,54 +51,39 @@ function calculateOneMarkdownLine(markdown) {
         markdown = markdown.replace(reg, '<i>' + res[0].slice(1, -1) + '</i>')
     }
 
-    //无序列表
+    //无序列表 接多行计算函数
     reg = /^- /
     res = reg.exec(markdown);
     if (res) {
         markdown = "<uli>" + markdown.slice(2) + "</uli>"
     }
 
-    //有序列表
+    //有序列表 接多行计算函数
     reg = /^(\d)+\. /
     res = reg.exec(markdown);
     if (res) {
         markdown = "<oli>" + markdown.slice(res[0].length) + "</oli>"
     }
+
+    //图片
+    reg=/!\[([\w\W]+)\]\(([\w\W]+)\)/g
+    markdown=markdown.replace(reg,(match,p1,p2)=>{
+        let res="<img src=\""+p2+"\" alt=\""+p1+"\"/>"
+        return res;
+    })
+
+    //单个简短代码块
+    reg=/(?!<=`)`(?!=`)(([^`])+)(?!<=`)`(?!=`)/g
+    markdown=markdown.replace(reg,(match,p1)=>"<code>"+p1+"</code>")
+
     return markdown;
-    // console.log(markdown)
-
-    // let curre
-    // let dom='';
-    // let reg,res;
-    // //#标题字体放大
-    // reg = /^#+ /
-    // res = reg.exec(markdown);
-    // if (res) {
-    //     dom+=('<h' + res[0].length + '>' +calculateOneMarkdownLine(markdown.slice(res[0].length))+'<h'+res[0].length+'/>')
-    // }
-    // //粗体斜体
-    // reg=/\*{1,2}[\w\W]\*{1,2}/
-    // res=reg.exec(markdown)
-    // if(res){
-    //     if(res[0][1]==='*'&&res[0][2]!=='*'){
-    //         //粗体
-    //         dom+='<b>'+res[0].slice(2,-2)+'</b>'
-    //     }else if(res[0][1]!=='*'){
-    //         //斜体
-    //         dom+='<i>'+res[0].slice(1,-1)+'</i>'
-    //     }else{
-    //         //其他
-    //         dom+=res[0];
-    //     }
-
-    // }
-
-    // return dom;
 }
 
 //计算markdown多行规则
 function calculateMultipleMarkdownLine(markdownDom) {
     let reg, res;
+
+
     //无序列表
     reg = /<uli>([\w\W]+)<\/uli>+/g
     markdownDom = markdownDom.replace(reg, (match) => {
@@ -116,6 +101,18 @@ function calculateMultipleMarkdownLine(markdownDom) {
         res = res.replace(/<\/oli>/g, "</li>");
         return res;
     })
+
+    //多行代码块
+    reg=/```[\w\W]+```/g
+    markdownDom=markdownDom.replace(reg,(match)=>{
+        console.log(match);
+        let language=match.slice(3,match.indexOf("\n"));
+        let code=match.slice(match.indexOf('\n')+1,-3);
+        code=code.replace(/\n/g,"<br/>")
+        let res="<code>"+"<b>"+language+"</b><br/>"+code+"</code>"
+        return res;
+    })
+
 
     return markdownDom;
 }
@@ -138,7 +135,7 @@ function calculateBlogContentDom(contentMarkdown) {
         domList.push(calculateOneMarkdownLine(markdown))
         // console.log(calculateOneMarkdownLine(markdown))
     }
-    let doms = calculateMultipleMarkdownLine(domList.join(""));
+    let doms = calculateMultipleMarkdownLine(domList.join("\n"));
     return doms;
 }
 

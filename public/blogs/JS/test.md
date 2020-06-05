@@ -9,9 +9,18 @@ keyword:测试,引擎,markdown
 ***
 ## shadiao
 **粗体**
+dwad`print()`
 ---
 - dwada
 - awdawf
+![baidu](https://www.baidu.com/img/flexible/logo/pc/result.png)
 *斜体*
 1. 565奥万大
 2. 8888wadaawdad
+
+```js
+console.log("fucker");
+alert("fucker");
+```
+
+

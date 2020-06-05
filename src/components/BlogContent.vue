@@ -53,7 +53,7 @@ export default {
             
             }catch(e){
                 this.blogContentDom="获取内容失败"
-                // throw e;
+                throw e;
             }
         }
     }
