@@ -2,7 +2,7 @@
     <div>
         <div id="blogHead">
             <div id="title">
-                {{blogHead.title}}
+                <h1>{{blogHead.title}}</h1>
             </div>
             <div id="date">
                 创建时间:{{blogHead.date}}

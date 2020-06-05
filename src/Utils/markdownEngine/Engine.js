@@ -17,12 +17,18 @@ function calculateBlogHead(contentMarkdown) {
 }
 
 function calculateOneMarkdownLine(markdown) {
-    console.log("+"+markdown+"+")
-    if(markdown==='')
-        return "<br>"
+
     let reg,res;
+
     //开始解析
-    
+
+    //换行
+    if(markdown==='')
+        return "<br/>"
+    //分割线
+    if(markdown==='***'||markdown==='---')
+        return "<hr/>"
+
     //#标题字体放大
     reg=/^#+ /;
     res = reg.exec(markdown);
@@ -40,12 +46,9 @@ function calculateOneMarkdownLine(markdown) {
     }
     //斜体
     reg=/\*{1}[\w\W]+\*{1}/
-    res=reg.exec(markdown);
-    
+    res=reg.exec(markdown);  
     if(res){
-        console.log(1,markdown)
         markdown=markdown.replace(reg,'<i>'+res[0].slice(1,-1)+'</i>')
-        console.log(2,markdown)
     }
 
     return markdown;
