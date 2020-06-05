@@ -21,6 +21,7 @@
 
 <script>
 import Engine from "../core/markdownEngine/Engine"
+import "../core/markdownEngine/Engine.css"
 export default {
     data(){
         return{
