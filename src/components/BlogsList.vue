@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Engine from "../Utils/markdownEngine/Engine"
+import Engine from "../core/markdownEngine/Engine"
 export default {
     props:['classification'],
     data(){
