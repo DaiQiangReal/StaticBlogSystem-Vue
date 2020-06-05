@@ -37,7 +37,7 @@ function calculateOneMarkdownLine(markdown) {
     }
 
     //粗体
-    reg = /\*{2}[\w\W]+\*{2}/
+    reg = /\*{2}(?!=\*)[\w\W]+(?!=\*)\*{2}/
     res = reg.exec(markdown);
     if (res) {
         
@@ -45,7 +45,7 @@ function calculateOneMarkdownLine(markdown) {
         
     }
     //斜体
-    reg = /\*{1}[\w\W]+\*{1}/
+    reg = /\*{1}(?!=\*)[\w\W]+(?!=\*)\*{1}/
     res = reg.exec(markdown);
     if (res) {
         markdown = markdown.replace(reg, '<i>' + res[0].slice(1, -1) + '</i>')
