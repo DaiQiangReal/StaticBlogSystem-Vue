@@ -51,6 +51,19 @@ function calculateOneMarkdownLine(markdown) {
         markdown=markdown.replace(reg,'<i>'+res[0].slice(1,-1)+'</i>')
     }
 
+    //无序列表
+    reg=/^- /
+    res=reg.exec(markdown);
+    if(res){
+        markdown="<uli>"+markdown.slice(2)+"</uli>"
+    }
+
+    //有序列表
+    reg=/^(\d)+\. /
+    res=reg.exec(markdown);
+    if(res){
+        markdown="<oli>"+markdown.slice(res[0].length)+"</oli>"
+    }
     return markdown;
     // console.log(markdown)
 
@@ -83,6 +96,21 @@ function calculateOneMarkdownLine(markdown) {
     // return dom;
 }
 
+//计算markdown多行规则
+function calculateMultipleMarkdownLine(markdownDom){
+    let reg,res;
+    //无序列表
+    reg=/<uli>([\w\W]+)<\/uli>+/g
+    markdownDom=markdownDom.replace(reg,(match)=>{
+        let res="<ul>"+match+"</ul>";
+        res=res.replace(/<uli>/g,"<li>");
+        res=res.replace(/<\/uli>/g,"</li>");
+        return res;
+    })
+
+    return markdownDom;
+}
+
 function calculateBlogContentDom(contentMarkdown) {
     let markdownList = contentMarkdown.split("\n");
     let domList=[];
@@ -101,8 +129,8 @@ function calculateBlogContentDom(contentMarkdown) {
         domList.push(calculateOneMarkdownLine(markdown))
         // console.log(calculateOneMarkdownLine(markdown))
     }
-    console.log(domList.join(""))
-    return domList.join("");
+    let doms=calculateMultipleMarkdownLine(domList.join(""));
+    return doms;
 }
 
 class Engine {
