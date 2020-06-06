@@ -136,6 +136,8 @@ function calculateMultipleMarkdownLine(markdownDom) {
             flag = true;
             let quoteList = match.split("\n");
             quoteList = quoteList.map((quote) => {
+                if(quote==="")
+                    return "";
                 if (quote[1] === '>') {
                     return quote.slice(1)
                 }
