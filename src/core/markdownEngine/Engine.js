@@ -84,10 +84,9 @@ function calculateOneMarkdownLine(markdown) {
     reg = /(?!<=`)`(?!=`)(([^`])+)(?!<=`)`(?!=`)/g
     markdown = markdown.replace(reg, (match, p1) => "<code>" + p1 + "</code>")
 
-    // //引用 添加换行方便多行识别模块识别
-    // reg=/^>.+/g
-    // markdown=markdown.replace(reg,(match)=>match+"\n")
-
+    //超链接
+    reg=/\[([\w\W]+)\]\(([\w\W]+)\)/g
+    markdown=markdown.replace(reg,(match,p1,p2)=>"<a href=\""+p2+"\">"+p1+"</a>")
 
     return markdown;
 }

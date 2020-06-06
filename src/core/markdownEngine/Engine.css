@@ -17,3 +17,6 @@ blockquote {
   border-left: 5px solid #eeebeb;
   padding-left: 1rem;
 }
+a {
+  text-decoration: none;
+}
