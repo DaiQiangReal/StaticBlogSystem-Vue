@@ -22,4 +22,38 @@ blockquote{
 a{
     text-decoration: none;
 }
+table{
+    border:1px solid gray ;
+    border-collapse:collapse;
+    
+}
+tbody{
+    width: max-content;
+    
+    th{
+        background-color: rgb(247, 244, 244);
+        border: 1px solid rgb(212, 212, 212);
+        border-collapse:collapse;
+        width: max-content;
+    }
+    td{
 
+        border: 1px solid rgb(212, 212, 212);
+        padding: 10px;
+        border-collapse:collapse;
+        width: max-content;
+        
+    }
+    tr{
+        
+        width: 500px;
+        padding: 10px;
+        &:nth-child(2n){
+            background-color: rgb(247, 244, 244)
+        }
+        &:hover{
+            background-color: rgb(236, 236, 236)
+        }
+    }
+
+}

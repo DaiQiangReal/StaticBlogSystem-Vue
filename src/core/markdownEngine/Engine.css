@@ -20,3 +20,32 @@ blockquote {
 a {
   text-decoration: none;
 }
+table {
+  border: 1px solid gray ;
+  border-collapse: collapse;
+}
+tbody {
+  width: max-content;
+}
+tbody th {
+  background-color: #f7f4f4;
+  border: 1px solid #d4d4d4;
+  border-collapse: collapse;
+  width: max-content;
+}
+tbody td {
+  border: 1px solid #d4d4d4;
+  padding: 10px;
+  border-collapse: collapse;
+  width: max-content;
+}
+tbody tr {
+  width: 500px;
+  padding: 10px;
+}
+tbody tr:nth-child(2n) {
+  background-color: #f7f4f4;
+}
+tbody tr:hover {
+  background-color: #ececec;
+}
