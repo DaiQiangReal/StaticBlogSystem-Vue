@@ -1,10 +1,17 @@
 <template>
-  
-        
-  <div id="blogContent" v-html="blogContentDom">
-      
+        <div id="blogHead">
+            <div id="title">
+                <h1>{{blogHead.title}}</h1>
+            </div>
+            <div id="date">
+                创建时间:{{blogHead.date}}
+            </div>
+            <div id="keyword">
+                关键词: {{blogHead.keyword}}
+            </div>
+  </div>
+ 
 
-    </div>
   
 
 </template>
@@ -16,33 +23,35 @@ export default {
     props:["markdownFileContent"],
     data(){
         return{
-            name:"BlogContent",
-            blogContentDom:"",
+            name:"BlogHead",  
+            blogHead:"",
             engine:null
-
         }
     },
+    created(){
+        this.getBlogHead();
+    },
     beforeMount(){
-        this.getBlogContent();
+
     },
     mounted(){
     },
     methods:{
-        async getBlogContent(){
+        async getBlogHead(){
             if(this.markdownFileContent===null)
                 return;
             try{
             this.engine=new Engine(this.markdownFileContent);
-            this.blogContentDom=this.engine.getBlogContentDom();
+            this.blogHead=this.engine.getBlogHead();
             }catch(e){
-                this.blogContentDom="获取内容失败"
+                this.blogHead="获取标题信息失败"
                 throw e;
             }
         }
     },
     watch:{
         markdownFileContent(){
-            this.getBlogContent();
+            this.getBlogHead();
         }
     }
 }
