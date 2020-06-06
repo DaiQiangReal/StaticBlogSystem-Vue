@@ -9,6 +9,9 @@ keyword:测试,引擎,markdown
 ***
 ## 二号黑体
 **粗体**
+***粗斜体***
+~删除线~
+
 测试代码 `print()`
 ---
 - 无序列表1
@@ -23,5 +26,10 @@ keyword:测试,引擎,markdown
 console.log("test");
 alert("test");
 ```
+
+>引用
+>引用2
+>>二级引用1
+>>二级引用2
 
 

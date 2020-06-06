@@ -1,5 +1,11 @@
-code {
+multiple-code {
   display: block;
   background-color: #eeebeb;
   border: 1px solid black;
+  font-family: monospace;
+}
+code {
+  background-color: #eeebeb;
+  border: 1px solid black;
+  font-family: monospace;
 }

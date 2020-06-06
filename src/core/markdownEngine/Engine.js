@@ -36,19 +36,27 @@ function calculateOneMarkdownLine(markdown) {
         markdown = ('<h' + (res[0].length - 1) + '>' + markdown.slice(res[0].length) + '</h' + (res[0].length - 1) + '>');
     }
 
+
     //粗体
     reg = /\*{2}(?!=\*)[\w\W]+(?!=\*)\*{2}/
     res = reg.exec(markdown);
     if (res) {
-        
+
         markdown = markdown.replace(reg, '<b>' + res[0].slice(2, -2) + '</b>')
-        
+
     }
     //斜体
     reg = /\*{1}(?!=\*)[\w\W]+(?!=\*)\*{1}/
     res = reg.exec(markdown);
     if (res) {
         markdown = markdown.replace(reg, '<i>' + res[0].slice(1, -1) + '</i>')
+    }
+
+    //删除线
+    reg = /~{1}(?!=~)[\w\W]+(?!=~)~{1}/
+    res = reg.exec(markdown);
+    if (res) {
+        markdown = markdown.replace(reg, '<s>' + res[0].slice(1, -1) + '</s>')
     }
 
     //无序列表 接多行计算函数
@@ -66,15 +74,20 @@ function calculateOneMarkdownLine(markdown) {
     }
 
     //图片
-    reg=/!\[([\w\W]+)\]\(([\w\W]+)\)/g
-    markdown=markdown.replace(reg,(match,p1,p2)=>{
-        let res="<img src=\""+p2+"\" alt=\""+p1+"\"/>"
+    reg = /!\[([\w\W]+)\]\(([\w\W]+)\)/g
+    markdown = markdown.replace(reg, (match, p1, p2) => {
+        let res = "<img src=\"" + p2 + "\" alt=\"" + p1 + "\"/>"
         return res;
     })
 
     //单个简短代码块
-    reg=/(?!<=`)`(?!=`)(([^`])+)(?!<=`)`(?!=`)/g
-    markdown=markdown.replace(reg,(match,p1)=>"<code>"+p1+"</code>")
+    reg = /(?!<=`)`(?!=`)(([^`])+)(?!<=`)`(?!=`)/g
+    markdown = markdown.replace(reg, (match, p1) => "<code>" + p1 + "</code>")
+
+    // //引用 添加换行方便多行识别模块识别
+    // reg=/^>.+/g
+    // markdown=markdown.replace(reg,(match)=>match+"\n")
+
 
     return markdown;
 }
@@ -103,15 +116,43 @@ function calculateMultipleMarkdownLine(markdownDom) {
     })
 
     //多行代码块
-    reg=/```[\w\W]+```/g
-    markdownDom=markdownDom.replace(reg,(match)=>{
-        console.log(match);
-        let language=match.slice(3,match.indexOf("\n"));
-        let code=match.slice(match.indexOf('\n')+1,-3);
-        code=code.replace(/\n/g,"<br/>")
-        let res="<code>"+"<b>"+language+"</b><br/>"+code+"</code>"
+    reg = /```[\w\W]+```/g
+    markdownDom = markdownDom.replace(reg, (match) => {
+        let language = match.slice(3, match.indexOf("\n")) + "<hr/>";
+        let code = match.slice(match.indexOf('\n') + 1, -3);
+        code = code.replace(/\n/g, "<br/>")
+        let res = "<multiple-code>" + "<b>" + language + "</b>" + code + "</multiple-code>"
         return res;
     })
+
+    console.log(markdownDom)
+    //多行引用
+    reg = /((?<=\n)>[^<^\n]+\n*)+/g
+    let flag = true;
+    while (flag) {
+        flag = false;
+        markdownDom = markdownDom.replace(reg, (match) => {
+            console.log("match:\n", match)
+            flag = true;
+            let quoteList = match.split("\n");
+            quoteList = quoteList.map((quote) => {
+                if (quote[1] === '>') {
+                    return quote.slice(1)
+                }
+                return "<p>" + quote.slice(1) + "</p>"
+            })
+            res = "<blockquote>\n" + quoteList.join("\n") + "\n</blockquote>";
+            return res;
+        })
+
+        console.log("dom:\n", markdownDom)
+
+    }
+
+    console.log(markdownDom)
+
+
+
 
 
     return markdownDom;
