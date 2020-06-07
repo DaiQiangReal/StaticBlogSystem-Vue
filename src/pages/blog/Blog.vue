@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <TopBar/>
         <div id="blogHead" >
             <BlogHead :markdownFileContent="markdownFileContent"/>
         </div>
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import TopBar from "../../components/TopBar"
 import BlogHead from "../../components/BlogHead"
 import BlogContent from "../../components/BlogContent";
 
@@ -21,6 +23,7 @@ export default {
         };
     },
     components: {
+        TopBar,
         BlogHead,
         BlogContent
     },
