@@ -59,7 +59,11 @@ export default {
 
 <style lang="less" scoped>
 #main {
+    width: 100vw;
+    
     #content {
+        width: 80vw;
+        margin: 0 10vw;
         margin-top: 3rem;
     }
 }

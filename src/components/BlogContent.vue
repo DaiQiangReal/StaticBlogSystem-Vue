@@ -49,10 +49,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-multiple-code{
-    word-wrap:break-word;
-    word-break: normal;
-    background: black;
-}
+
 </style>>
 

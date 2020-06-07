@@ -47,7 +47,8 @@ export default {
     position: fixed;
     top: 0;
     display: flex;
-    width: 100%;
+    width: 100vw;
+    // margin: 0 10vw;
     height: 3rem;
     justify-content: flex-end;
     box-shadow: 0 0 5px 0.1px;
@@ -75,6 +76,7 @@ export default {
 
     #classification {
         display: inline-block;
+        
         height: 1rem;
         line-height: 1rem;
         margin: 1rem 1.5rem 1rem 1.5rem;
