@@ -1,17 +1,20 @@
 <template>
     <div id="main">
-        <TopBar/>
-        <div id="blogHead" >
-            <BlogHead :markdownFileContent="markdownFileContent"/>
+        <TopBar />
+        <div id="content">
+            <div id="blogHead">
+                <BlogHead :markdownFileContent="markdownFileContent" />
+            </div>
+            <div id="blogContent">
+                <BlogContent :markdownFileContent="markdownFileContent" />
+            </div>
         </div>
-        <div id="blogContent" ></div>
-        <BlogContent :markdownFileContent="markdownFileContent"/>
     </div>
 </template>
 
 <script>
-import TopBar from "../../components/TopBar"
-import BlogHead from "../../components/BlogHead"
+import TopBar from "../../components/TopBar";
+import BlogHead from "../../components/BlogHead";
 import BlogContent from "../../components/BlogContent";
 
 export default {
@@ -19,7 +22,7 @@ export default {
     data() {
         return {
             markdownFileContent: null,
-            markdownFilePath: "",
+            markdownFilePath: ""
         };
     },
     components: {
@@ -41,9 +44,11 @@ export default {
     mounted() {},
     methods: {
         async getMarkdownFileContent() {
-            try{
-            this.markdownFileContent=await (await fetch(this.markdownFilePath)).text();
-            }catch(e){
+            try {
+                this.markdownFileContent = await (
+                    await fetch(this.markdownFilePath)
+                ).text();
+            } catch (e) {
                 console.log("获取博文markdown失败");
                 throw e;
             }
@@ -52,7 +57,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
 #main {
+    #content {
+        margin-top: 3rem;
+    }
 }
 </style>
