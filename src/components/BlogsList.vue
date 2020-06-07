@@ -5,7 +5,7 @@
       </div>
       <hr>
       <a v-for="blogName in blogListData" :key="blogName" :href="'blog.html'+'?'+'path='+classification+'&filename='+blogName" target="_blank">
-          {{blogName}}
+          {{blogName.endsWith(".md")?blogName.slice(0,-3):blogName}}
       </a>
   </div>
 </template>
@@ -37,6 +37,7 @@ export default {
                 setTimeout(this.getBlogsListByClassification,100);
                 return;
             }
+            
             let nameTxtCountent=await (await fetch("./blogs/"+this.classification+"/name.txt")).text();
             this.blogListData=nameTxtCountent.split('\n').map((blogFile)=>blogFile.trim())
         },

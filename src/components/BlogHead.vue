@@ -24,7 +24,11 @@ export default {
     data(){
         return{
             name:"BlogHead",  
-            blogHead:"",
+            blogHead:{
+                title:"加载中...",
+                date:"加载中...",
+                keyword:"加载中..."
+            },
             engine:null
         }
     },

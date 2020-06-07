@@ -17,7 +17,7 @@ export default {
     data(){
         return{
             name:"BlogContent",
-            blogContentDom:"",
+            blogContentDom:"加载中...",
             engine:null
 
         }

@@ -87,6 +87,7 @@ function calculateOneMarkdownLine(markdown) {
 
     //单个简短代码块
     reg = /(?!<=`)`(?!=`)(([^`])+)(?!<=`)`(?!=`)/g
+    markdown=markdown.replace(/ /g,"&nbsp;");
     markdown = markdown.replace(reg, (match, p1) => "<code>" + p1 + "</code>")
 
     //超链接
@@ -122,10 +123,11 @@ function calculateMultipleMarkdownLine(markdownDom) {
     //多行代码块
     reg = /```[\w\W]+```/g
     markdownDom = markdownDom.replace(reg, (match) => {
-        let language = match.slice(3, match.indexOf("\n")) + "<hr/>";
+        match=match.replace(/ /g,"&nbsp;");
+        let language = match.slice(3, match.indexOf("\n"));
         let code = match.slice(match.indexOf('\n') + 1, -3);
         code = code.replace(/\n/g, "<br/>")
-        let res = "<multiple-code>" + "<b>" + language + "</b>" + code + "</multiple-code>"
+        let res = "<multiple-code>" + "<code-language>" + language + "</code-language>" + code + "</multiple-code>"
         return res;
     })
 

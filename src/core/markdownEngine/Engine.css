@@ -1,11 +1,18 @@
 multiple-code {
   display: block;
-  background-color: #eeebeb;
+  background-color: #f5f5f5;
   border: 1px solid black;
   font-family: monospace;
 }
+code-language {
+  font-weight: bold;
+  font-family: monospace;
+  display: block;
+  border-bottom: 1px dashed black;
+  line-height: 2em;
+}
 code {
-  background-color: #eeebeb;
+  background-color: #f5f5f5;
   border: 1px solid black;
   font-family: monospace;
 }
