@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="main">
         <TopBar/>
         <div id="blogHead" >
             <BlogHead :markdownFileContent="markdownFileContent"/>
@@ -15,7 +15,7 @@ import BlogHead from "../../components/BlogHead"
 import BlogContent from "../../components/BlogContent";
 
 export default {
-    name: "App",
+    name: "Blog",
     data() {
         return {
             markdownFileContent: null,
@@ -27,9 +27,9 @@ export default {
         BlogHead,
         BlogContent
     },
-    beforeMount() {
+    created() {
         let url = window.location.href;
-        let reg = /\?[\w\W]+/;
+        let reg = /\?.+/;
         let parmas = reg.exec(url)[0] ? reg.exec(url)[0] : null;
         if (parmas) {
             parmas = parmas.slice(1).split("&");
@@ -53,6 +53,6 @@ export default {
 </script>
 
 <style>
-#app {
+#main {
 }
 </style>

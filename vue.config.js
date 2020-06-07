@@ -24,7 +24,13 @@ module.exports = {
           template:'public/blog.html',
           filename:'blog.html',
     
-      }
       },
+      classification:{
+        entry:'src/pages/classification/classification.js',
+        template:'public/classification.html',
+        filename:'classification.html',
+  
+    }
+    },
         
   }
