@@ -2,7 +2,10 @@
     <div id="main">
         <TopBar :hightLight="classification"/>
         <div id="content">
-            <BlogBrief v-for="blog in blogList" :key="blog" :markdownFilePath="'./blogs/'+classification+'/'+blog"/>
+            <div id="blogList">
+                <BlogBrief v-for="filename in blogList" :key="filename" :classification="classification" :filename="filename"/>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -43,8 +46,10 @@ export default {
 
 <style lang="less" scoped>
 #main{
+    
     #content{
         margin-top: 3rem;
+        
     }
 }
 </style>

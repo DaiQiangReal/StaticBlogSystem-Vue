@@ -1,10 +1,10 @@
 <template>
     <div id="blogBrief">
-        <div id="blogTitle" >{{blogTitle}}</div>
+        <a id="blogTitle" :href="'./blog.html?path='+classification+'&filename='+filename">{{blogTitle}}</a>
         <div id="blogDetail">{{blogDetail}}</div>
         <div id="blogHead">
             <div id="blogDate">{{blogDate}}</div>
-            <div id="blogKeyword">{{blogKeyword}}</div>
+            <div id="blogKeyword">关键词: {{blogKeyword}}</div>
         </div>
     </div>
 </template>
@@ -13,14 +13,15 @@
 import Engine from "../core/markdownEngine/Engine";
 export default {
     name: "BlogBrief",
-    props: ["markdownFilePath"],
+    props: ["classification","filename"],
     data() {
         return {
+            markdownFilePath:"",
             blogTitle: "",
             blogDetail: "",
             blogDate:"",
             blogKeyword:"",
-            engine: null
+            engine: null,
         };
     },
     created() {
@@ -36,6 +37,7 @@ export default {
             if ((!this.markdownFilePath)&&this.engine) {
                 return;
             }
+            this.markdownFilePath="./blogs/"+this.classification+"/"+this.filename;
             let markdownFileContent = await (
                 await fetch(this.markdownFilePath)
             ).text();
@@ -82,4 +84,44 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#blogBrief{
+    border-bottom: 1px solid gray;
+    padding: 1rem 1rem;
+    a {
+        text-decoration:none;
+        &:link {
+            color: black;
+            text-decoration:none;
+        }
+        &:visited {
+            color: black;
+            text-decoration:none;
+        }
+        &:hover {
+            color: black;
+            text-decoration:none;
+        }
+        &:active {
+            color: black;
+            text-decoration:none;
+        }
+    }
+    #blogTitle{
+        color: rgb(0, 102, 255);
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    #blogDetail{
+        margin: 0.2rem 0 0.2rem 0;
+    }
+    #blogHead{
+        #blogDate{
+            display: inline-block;
+        }
+        #blogKeyword{
+            display: inline-block;
+            margin-left: 1rem;
+        }
+    }
+}
 </style>
