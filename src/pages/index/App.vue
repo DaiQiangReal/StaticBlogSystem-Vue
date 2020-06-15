@@ -1,15 +1,18 @@
 <template>
   <div id="app">
+      <TopBar/>
       <BlogsList :classification="'JS'"/>
   </div>
 </template>
 
 <script>
+import TopBar from "../../components/TopBar"
 import BlogsList from '../../components/BlogsList.vue'
 
 export default {
   name: 'App',
   components: {
+      TopBar,
     BlogsList,
   }
 }
