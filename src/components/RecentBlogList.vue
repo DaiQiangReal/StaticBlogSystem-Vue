@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import Engine from "../core/markdownEngine/Engine"
 import BlogBrief from "./BlogBrief"
 export default {
     name:"RecentBLogList",
@@ -24,6 +25,25 @@ export default {
         return{
             
         }
+    },
+    created(){
+        
+    },
+    methods:{
+         async getBlogUnixTime(classification, filename) {
+            let markdownFilePath = "./blogs/" + classification + "/" + filename;
+            let markdownFileContent = await (
+                await fetch(markdownFilePath)
+            ).text();
+            let engine = new Engine(markdownFileContent);
+            let blogHead = engine.getBlogHead();
+            let blogDate = blogHead.date;
+            let unixTime = new Date(blogDate).getTime();
+            console.log(blogDate);
+            console.log(unixTime);
+            
+            return unixTime;
+        },
     }
 };
 </script>
