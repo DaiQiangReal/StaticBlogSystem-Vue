@@ -3,13 +3,12 @@
         <div id="content">
             <div id="blogList">
                 <BlogBrief
-                    v-for="filename in blogList"
-                    :key="filename"
-                    :classification="classification"
-                    :filename="filename"
+                    v-for="blog in recentBlogList"
+                    :key="blog.blogName+blog.time"
+                    :classification="blog.classification"
+                    :filename="blog.blogName"
                 />
-
-                <h1 v-if="blogList.length===0" style="text-align:center">未找到文件</h1>
+                <h1 v-if="recentBlogList.length===0" style="text-align:center">未找到文件</h1>
             </div>
         </div>
     </div>
@@ -17,32 +16,33 @@
 
 <script>
 import Engine from "../core/markdownEngine/Engine"
+import {getBlogUnixTime,getClassificationList,getBlogListByClassification} from "../core/Utils"
 import BlogBrief from "./BlogBrief"
 export default {
     name:"RecentBLogList",
-    components:[BlogBrief],
+    props:["start","end"],
+    components:{BlogBrief},
     data(){
         return{
-            
+            recentBlogList:[]
         }
     },
     created(){
-        
+        this.calculateRecentBlogList();
     },
     methods:{
-         async getBlogUnixTime(classification, filename) {
-            let markdownFilePath = "./blogs/" + classification + "/" + filename;
-            let markdownFileContent = await (
-                await fetch(markdownFilePath)
-            ).text();
-            let engine = new Engine(markdownFileContent);
-            let blogHead = engine.getBlogHead();
-            let blogDate = blogHead.date;
-            let unixTime = new Date(blogDate).getTime();
-            console.log(blogDate);
-            console.log(unixTime);
-            
-            return unixTime;
+        async calculateRecentBlogList(){
+            let classificationList=await getClassificationList();
+            let allBlogList=[];
+            for(let classification of classificationList){
+                let blogList=await getBlogListByClassification(classification.folderName);  
+                for(let blogName of blogList){
+                    let time=await getBlogUnixTime(classification.folderName,blogName);
+                    allBlogList.push({classification:classification.folderName,blogName,time})
+                }
+            }
+            allBlogList.sort((blog0,blog1)=>blog1.time-blog0.time)
+            this.recentBlogList=allBlogList.slice(this.start,this.end);
         },
     }
 };

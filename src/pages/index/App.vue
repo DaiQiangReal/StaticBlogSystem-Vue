@@ -1,19 +1,20 @@
 <template>
   <div id="app">
       <TopBar hightLight="index"/>
-      <BlogsList :classification="'JS'"/>
+      <RecentBlogList :start="0" :end="5"/>
   </div>
 </template>
 
 <script>
 import TopBar from "../../components/TopBar"
 import BlogsList from '../../components/BlogsList.vue'
-
+import RecentBlogList from "../../components/RecentBlogList"
 export default {
   name: 'App',
   components: {
       TopBar,
     BlogsList,
+    RecentBlogList
   }
 }
 </script>

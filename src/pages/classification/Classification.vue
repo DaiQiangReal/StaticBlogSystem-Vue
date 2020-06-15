@@ -20,6 +20,7 @@
 import TopBar from "../../components/TopBar";
 import BlogBrief from "../../components/BlogBrief";
 import Engine from "../../core/markdownEngine/Engine";
+import {getBlogUnixTime} from "../../core/Utils"
 export default {
     name: "Classification",
     data() {
@@ -54,7 +55,7 @@ export default {
        
             let blogListTime={}
             for(let filename of this.blogList){
-                blogListTime[filename]=await this.getBlogUnixTime(this.classification,filename);
+                blogListTime[filename]=await getBlogUnixTime(this.classification,filename);
             }
             this.blogList.sort(
                (filename0,filename1)=>blogListTime[filename1]-blogListTime[filename0]
@@ -62,20 +63,7 @@ export default {
          
             
         },
-        async getBlogUnixTime(classification, filename) {
-            let markdownFilePath = "./blogs/" + classification + "/" + filename;
-            let markdownFileContent = await (
-                await fetch(markdownFilePath)
-            ).text();
-            let engine = new Engine(markdownFileContent);
-            let blogHead = engine.getBlogHead();
-            let blogDate = blogHead.date;
-            let unixTime = new Date(blogDate).getTime();
-            console.log(blogDate);
-            console.log(unixTime);
-            
-            return unixTime;
-        }
+        
     }
 };
 </script>
