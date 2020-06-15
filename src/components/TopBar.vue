@@ -2,6 +2,11 @@
     <div id="topbar">
         <a
             id="classification"
+            :class="hightLight==='index'?'hight-light':''"
+            :href="'./index.html'"
+        >首页</a>
+        <a
+            id="classification"
             v-for="classification of classifications"
             :key="JSON.stringify(classification)"
             :class="Object.keys(classification)[0]===hightLight?'hight-light':''"
@@ -47,7 +52,10 @@ export default {
     position: fixed;
     top: 0;
     display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
     width: 100vw;
+    padding: 0 10vw 0 10vw;
     // margin: 0 10vw;
     height: 3rem;
     justify-content: flex-end;
@@ -72,16 +80,22 @@ export default {
             color: black;
             text-decoration:none;
         }
+        
     }
 
     #classification {
         display: inline-block;
         
         height: 1rem;
+        min-width: 2rem;
         line-height: 1rem;
-        margin: 1rem 1.5rem 1rem 1.5rem;
+        // margin: 1rem 1.5rem 1rem 1.5rem;
+        margin: 1rem 0.75rem 1rem 0.75rem;
         transition: 200ms;
         padding-bottom: 0.3rem;
+        &:first-child{
+            margin-right: auto;
+        }
         &:hover {
             color: rgb(30, 102, 210);
             cursor: pointer;

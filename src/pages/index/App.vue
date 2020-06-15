@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <TopBar/>
+      <TopBar hightLight="index"/>
       <BlogsList :classification="'JS'"/>
   </div>
 </template>
