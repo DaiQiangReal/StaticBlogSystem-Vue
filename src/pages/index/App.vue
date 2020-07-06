@@ -1,7 +1,8 @@
 <template>
   <div id="app">
       <TopBar hightLight="index"/>
-      <RecentBlogList :start="0" :end="5"/>
+      <div id="content"><RecentBlogList :start="0" :end="5"/></div>
+      
   </div>
 </template>
 
@@ -19,8 +20,12 @@ export default {
 }
 </script>
 
-<style>
-#app {
-
+<style lang="scss" scoped>
+#app{
+    #content{
+        margin: 3rem 0 0 0;
+    }
 }
 </style>
+
+
