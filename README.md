@@ -28,7 +28,7 @@
 # 博文界面(暂时无样式仅测试)
 ![博文界面(无样式仅测试)](./screenshots/博文界面(无样式仅测试).png)
 
-## 启动前安装依赖 Project setup
+### 启动前安装依赖 Project setup
 ```
 yarn install
 ```
