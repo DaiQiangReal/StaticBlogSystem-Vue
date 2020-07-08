@@ -28,25 +28,20 @@
 # 博文界面(暂时无样式仅测试)
 ![博文界面(无样式仅测试)](./screenshots/博文界面(无样式仅测试).png)
 
-## Project setup
+## 启动前安装依赖 Project setup
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 启动测试 Compiles and hot-reloads for development
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### 编译 Compiles and minifies for production
 ```
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
+### vue-cli 帮助文档 Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
