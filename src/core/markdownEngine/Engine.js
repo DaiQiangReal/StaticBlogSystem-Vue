@@ -22,9 +22,11 @@ function calculateOneMarkdownLine(markdown) {
 
     //开始解析
 
+    
     //换行
     if (markdown === '')
         return "<br/>"
+    
     //分割线
     if (markdown === '***' || markdown === '---')
         return "<hr/>"
@@ -77,6 +79,10 @@ function calculateOneMarkdownLine(markdown) {
     if (res) {
         markdown = "<oli>" + markdown.slice(res[0].length) + "</oli>"
     }
+    //单个简短代码块
+    reg = /(?!<=`)`(?!=`)(([^`])+)(?!<=`)`(?!=`)/g
+    markdown=markdown.replace(/ /g,"&nbsp;");
+    markdown = markdown.replace(reg, (match, p1) => "<code>" + p1 + "</code>")
 
     //图片
     reg = /!\[([\w\W]+)\]\(([\w\W]+)\)/g
@@ -84,11 +90,8 @@ function calculateOneMarkdownLine(markdown) {
         let res = "<img src=\"" + p2 + "\" alt=\"" + p1 + "\"/>"
         return res;
     })
-
-    //单个简短代码块
-    reg = /(?!<=`)`(?!=`)(([^`])+)(?!<=`)`(?!=`)/g
-    markdown=markdown.replace(/ /g,"&nbsp;");
-    markdown = markdown.replace(reg, (match, p1) => "<code>" + p1 + "</code>")
+    
+    
 
     //超链接
     reg = /\[([\w\W]+)\]\(([\w\W]+)\)/g
@@ -211,13 +214,6 @@ function calculateMultipleMarkdownLine(markdownDom) {
         
         return tableDom;
     })
-
-
-
-
-
-
-
     return markdownDom;
 }
 
@@ -237,7 +233,7 @@ function calculateBlogContentDom(contentMarkdown) {
     for (; currentLineIndex < markdownList.length; currentLineIndex++) {
         let markdown = markdownList[currentLineIndex];
         domList.push(calculateOneMarkdownLine(markdown))
-        // console.log(calculateOneMarkdownLine(markdown))
+        console.log(calculateOneMarkdownLine(markdown))
     }
     let doms = calculateMultipleMarkdownLine(domList.join("\n"));
     return doms;
